@@ -46,7 +46,7 @@ const BookingForm = ({ selectedDate, selectedTime, onSuccess, onBack }: BookingF
   return (
     <div className="booking-form-container">
       <div className="booking-summary">
-        <h3>Thông tin buổi trị liệu</h3>
+        <h3>Thông tin buổi nghe chuông</h3>
         <div className="summary-details">
           <div className="summary-item">
             <span className="summary-label">Ngày</span>

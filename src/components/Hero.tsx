@@ -9,8 +9,7 @@ const Hero = () => {
         <h1>Maison Healing</h1>
         <p className="hero-description">
           Khám phá hành trình chữa lành sâu sắc qua âm thanh trị liệu. 
-          Trải nghiệm sự kết hợp hoàn hảo giữa chuông xoay, gong và các nhạc cụ 
-          truyền thống, mang đến sự thư giãn tuyệt đối cho tâm hồn và cơ thể.
+          Trải nghiệm sự kết hợp hoàn hảo giữa Gông, chuông thạch anh, chuông kim loại Nepal, chuông gió, trống sóng biển, mang đến sự thư giãn tuyệt đối cho tâm hồn và cơ thể.
         </p>
         <Link to="/booking" className="btn-primary">
           Đặt lịch ngay

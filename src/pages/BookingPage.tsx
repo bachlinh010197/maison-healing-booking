@@ -42,7 +42,7 @@ const BookingPage = () => {
   return (
     <div className="booking-page">
       <div className="booking-hero">
-        <h1>Đặt lịch trị liệu</h1>
+        <h1>Đặt lịch nghe chuông</h1>
         <p>Chọn ngày và giờ phù hợp để bắt đầu hành trình chữa lành của bạn</p>
       </div>
 

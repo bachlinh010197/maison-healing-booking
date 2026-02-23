@@ -3,8 +3,8 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-brand">
-          <h3>Maison Healing</h3>
-          <p>Hành trình chữa lành bằng âm thanh</p>
+          <h3>Maison Soundhealing</h3>
+          <p>Unwind & Recharged</p>
         </div>
         <div className="footer-info">
           <div className="footer-section">
@@ -14,8 +14,8 @@ const Footer = () => {
           </div>
           <div className="footer-section">
             <h4>Liên hệ</h4>
-            <p>Email: info@maisonhealing.com</p>
-            <p>Phone: +84 xxx xxx xxx</p>
+            <p>Email: bachdiem1993@gmail.com</p>
+            <p>WhatsApp/Zalo/Phone: +84 336256356</p>
           </div>
         </div>
         <div className="footer-bottom">
