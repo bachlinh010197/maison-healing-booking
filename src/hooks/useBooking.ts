@@ -16,14 +16,15 @@ export const useBooking = () => {
         query(
           collection(db, 'bookings'),
           where('date', '==', bookingData.date),
-          where('timeSlot', '==', bookingData.timeSlot),
-          where('status', '!=', 'cancelled')
+          where('timeSlot', '==', bookingData.timeSlot)
         )
       );
 
-      const totalGuests = existingBookings.docs.reduce((sum, doc) => {
-        return sum + (doc.data().numberOfGuests || 1);
-      }, 0);
+      const totalGuests = existingBookings.docs
+        .filter(doc => doc.data().status !== 'cancelled')
+        .reduce((sum, doc) => {
+          return sum + (doc.data().numberOfGuests || 1);
+        }, 0);
 
       if (totalGuests + bookingData.numberOfGuests > 20) {
         setError('Xin lỗi, khung giờ này đã đầy. Vui lòng chọn khung giờ khác.');
@@ -40,6 +41,7 @@ export const useBooking = () => {
       setLoading(false);
       return docRef.id;
     } catch (err) {
+      console.error('Booking error:', err);
       setError('Đã xảy ra lỗi. Vui lòng thử lại sau.');
       setLoading(false);
       return null;
@@ -50,11 +52,12 @@ export const useBooking = () => {
     try {
       const q = query(
         collection(db, 'bookings'),
-        where('date', '==', date),
-        where('status', '!=', 'cancelled')
+        where('date', '==', date)
       );
       const snapshot = await getDocs(q);
-      return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as Booking[];
+      return snapshot.docs
+        .filter(doc => doc.data().status !== 'cancelled')
+        .map(doc => ({ id: doc.id, ...doc.data() })) as Booking[];
     } catch {
       return [];
     }
