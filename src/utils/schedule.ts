@@ -1,4 +1,4 @@
-import { format, isWeekend, getDay } from 'date-fns';
+import { format, getDay } from 'date-fns';
 
 export const getTimeSlotsForDate = (date: Date): string[] => {
   const day = getDay(date); // 0 = Sunday, 6 = Saturday

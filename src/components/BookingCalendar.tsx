@@ -31,7 +31,7 @@ const BookingCalendar = ({ selectedDate, onSelectDate }: BookingCalendarProps) =
     const startDate = startOfWeek(monthStart, { weekStartsOn: 0 });
     const endDate = endOfWeek(monthEnd, { weekStartsOn: 0 });
 
-    const days: JSX.Element[] = [];
+    const days: React.ReactElement[] = [];
     let day = startDate;
 
     while (day <= endDate) {
