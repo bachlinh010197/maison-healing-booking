@@ -3,6 +3,20 @@ export interface TimeSlot {
   available: boolean;
 }
 
+export type ServiceType = 'group-sound-bath' | 'therapy-1-1';
+
+export interface ServiceOption {
+  type: ServiceType;
+  name: string;
+  price: number;
+  unit: string;
+}
+
+export const SERVICES: ServiceOption[] = [
+  { type: 'group-sound-bath', name: 'Group Sound Bath', price: 350000, unit: 'pax' },
+  { type: 'therapy-1-1', name: 'Soundhealing Therapy 1:1', price: 1000000, unit: 'session' },
+];
+
 export interface Booking {
   id?: string;
   name: string;
@@ -10,7 +24,9 @@ export interface Booking {
   phone: string;
   date: string;
   timeSlot: string;
+  serviceType: ServiceType;
   numberOfGuests: number;
+  totalPrice: number;
   notes?: string;
   createdAt: Date;
   status: 'confirmed' | 'pending' | 'cancelled';

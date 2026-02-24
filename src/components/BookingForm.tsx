@@ -1,25 +1,45 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { format } from 'date-fns';
 import { enUS } from 'date-fns/locale';
 import { useBooking } from '../hooks/useBooking';
 import { formatDate } from '../utils/schedule';
+import { SERVICES } from '../types/booking';
+import type { ServiceType } from '../types/booking';
 
 interface BookingFormProps {
   selectedDate: Date;
   selectedTime: string;
-  onSuccess: (bookingId: string) => void;
+  defaultService?: ServiceType;
+  onSuccess: (bookingId: string, serviceType?: ServiceType, totalPrice?: number) => void;
   onBack: () => void;
 }
 
-const BookingForm = ({ selectedDate, selectedTime, onSuccess, onBack }: BookingFormProps) => {
+const formatPrice = (price: number) => {
+  return new Intl.NumberFormat('vi-VN').format(price) + ' VND';
+};
+
+const BookingForm = ({ selectedDate, selectedTime, defaultService, onSuccess, onBack }: BookingFormProps) => {
   const { createBooking, loading, error } = useBooking();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
+    serviceType: (defaultService || 'group-sound-bath') as ServiceType,
     numberOfGuests: 1,
     notes: '',
   });
+
+  const selectedService = useMemo(
+    () => SERVICES.find((s) => s.type === formData.serviceType)!,
+    [formData.serviceType]
+  );
+
+  const totalPrice = useMemo(() => {
+    if (formData.serviceType === 'group-sound-bath') {
+      return selectedService.price * formData.numberOfGuests;
+    }
+    return selectedService.price;
+  }, [formData.serviceType, formData.numberOfGuests, selectedService.price]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,10 +48,11 @@ const BookingForm = ({ selectedDate, selectedTime, onSuccess, onBack }: BookingF
       ...formData,
       date: formatDate(selectedDate),
       timeSlot: selectedTime,
+      totalPrice,
     });
 
     if (bookingId) {
-      onSuccess(bookingId);
+      onSuccess(bookingId, formData.serviceType, totalPrice);
     }
   };
 
@@ -40,6 +61,14 @@ const BookingForm = ({ selectedDate, selectedTime, onSuccess, onBack }: BookingF
     setFormData((prev) => ({
       ...prev,
       [name]: name === 'numberOfGuests' ? parseInt(value) : value,
+    }));
+  };
+
+  const handleServiceSelect = (type: ServiceType) => {
+    setFormData((prev) => ({
+      ...prev,
+      serviceType: type,
+      numberOfGuests: type === 'therapy-1-1' ? 1 : prev.numberOfGuests,
     }));
   };
 
@@ -62,6 +91,26 @@ const BookingForm = ({ selectedDate, selectedTime, onSuccess, onBack }: BookingF
       </div>
 
       <form onSubmit={handleSubmit} className="booking-form">
+        <h3>Select Service</h3>
+
+        <div className="service-options">
+          {SERVICES.map((service) => (
+            <div
+              key={service.type}
+              className={`service-option ${formData.serviceType === service.type ? 'selected' : ''}`}
+              onClick={() => handleServiceSelect(service.type)}
+            >
+              <div className="service-option-radio">
+                <div className="radio-dot" />
+              </div>
+              <div className="service-option-info">
+                <span className="service-option-name">{service.name}</span>
+                <span className="service-option-price">{formatPrice(service.price)}/{service.unit}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
         <h3>Personal Information</h3>
         
         <div className="form-group">
@@ -103,20 +152,39 @@ const BookingForm = ({ selectedDate, selectedTime, onSuccess, onBack }: BookingF
           />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="numberOfGuests">Number of Guests</label>
-          <select
-            id="numberOfGuests"
-            name="numberOfGuests"
-            value={formData.numberOfGuests}
-            onChange={handleChange}
-          >
-            {[1, 2, 3, 4, 5].map((n) => (
-              <option key={n} value={n}>
-                {`${n} ${n === 1 ? 'guest' : 'guests'}`}
-              </option>
-            ))}
-          </select>
+        {formData.serviceType === 'group-sound-bath' && (
+          <div className="form-group">
+            <label htmlFor="numberOfGuests">Number of Guests</label>
+            <select
+              id="numberOfGuests"
+              name="numberOfGuests"
+              value={formData.numberOfGuests}
+              onChange={handleChange}
+            >
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
+                <option key={n} value={n}>
+                  {`${n} ${n === 1 ? 'guest' : 'guests'}`}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
+        <div className="booking-total">
+          <div className="total-row">
+            <span className="total-label">Service</span>
+            <span className="total-value">{selectedService.name}</span>
+          </div>
+          {formData.serviceType === 'group-sound-bath' && (
+            <div className="total-row">
+              <span className="total-label">Guests</span>
+              <span className="total-value">{formData.numberOfGuests} × {formatPrice(selectedService.price)}</span>
+            </div>
+          )}
+          <div className="total-row total-final">
+            <span className="total-label">Total</span>
+            <span className="total-value total-price">{formatPrice(totalPrice)}</span>
+          </div>
         </div>
 
         <div className="form-group">

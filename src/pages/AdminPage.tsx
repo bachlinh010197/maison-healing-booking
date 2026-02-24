@@ -109,7 +109,9 @@ const AdminPage = () => {
                   <th>Name</th>
                   <th>Email</th>
                   <th>Phone</th>
+                  <th>Service</th>
                   <th>Guests</th>
+                  <th>Total</th>
                   <th>Notes</th>
                   <th>Status</th>
                   <th>Actions</th>
@@ -123,7 +125,9 @@ const AdminPage = () => {
                     <td>{booking.name}</td>
                     <td>{booking.email}</td>
                     <td>{booking.phone}</td>
+                    <td>{booking.serviceType === 'therapy-1-1' ? 'Therapy 1:1' : 'Group Sound Bath'}</td>
                     <td>{booking.numberOfGuests}</td>
+                    <td>{booking.totalPrice ? new Intl.NumberFormat('vi-VN').format(booking.totalPrice) + ' ₫' : '—'}</td>
                     <td>{booking.notes || '—'}</td>
                     <td>
                       <span className={`status-badge ${booking.status}`}>

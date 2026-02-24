@@ -4,9 +4,15 @@ interface BookingConfirmationProps {
   bookingId: string;
   date: string;
   time: string;
+  service?: string;
+  totalPrice?: number;
 }
 
-const BookingConfirmation = ({ bookingId, date, time }: BookingConfirmationProps) => {
+const formatPrice = (price: number) => {
+  return new Intl.NumberFormat('vi-VN').format(price) + ' VND';
+};
+
+const BookingConfirmation = ({ bookingId, date, time, service, totalPrice }: BookingConfirmationProps) => {
   return (
     <div className="booking-confirmation">
       <div className="confirmation-icon">✓</div>
@@ -27,6 +33,18 @@ const BookingConfirmation = ({ bookingId, date, time }: BookingConfirmationProps
           <span className="detail-label">Time</span>
           <span className="detail-value">{time}</span>
         </div>
+        {service && (
+          <div className="detail-item">
+            <span className="detail-label">Service</span>
+            <span className="detail-value">{service}</span>
+          </div>
+        )}
+        {totalPrice != null && (
+          <div className="detail-item">
+            <span className="detail-label">Total</span>
+            <span className="detail-value detail-price">{formatPrice(totalPrice)}</span>
+          </div>
+        )}
       </div>
       <div className="confirmation-actions">
         <Link to="/" className="btn-secondary">

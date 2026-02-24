@@ -31,28 +31,32 @@ const HomePage = () => {
           <span className="section-subtitle">✦ Experience ✦</span>
           <h2>Our Services</h2>
           <div className="services-grid">
-            <div className="service-card">
+            <Link to="/booking?service=group-sound-bath" className="service-card service-card-link">
               <div className="service-card-image">
                 <img src={serviceBathImg} alt="Group Sound Bath" />
               </div>
               <div className="service-card-body">
                 <h3>Group Sound Bath</h3>
+                <span className="service-price">350,000 VND/pax</span>
                 <p>
                   Experience a group sound bath with Gongs, singing bowls, wind chimes, and ocean drums. Absolute relaxation in a peaceful space.
                 </p>
+                <span className="service-book-btn">Book Now →</span>
               </div>
-            </div>
-            <div className="service-card">
+            </Link>
+            <Link to="/booking?service=therapy-1-1" className="service-card service-card-link">
               <div className="service-card-image">
                 <img src={serviceOneImg} alt="Soundhealing therapy 1:1" />
               </div>
               <div className="service-card-body">
                 <h3>Soundhealing therapy 1:1</h3>
+                <span className="service-price">1,000,000 VND/session</span>
                 <p>
                   A personalized sound healing session, specially designed to meet your individual therapeutic needs.
                 </p>
+                <span className="service-book-btn">Book Now →</span>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </section>

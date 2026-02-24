@@ -1,17 +1,28 @@
 import { useState } from 'react';
 import { format } from 'date-fns';
+import { useSearchParams } from 'react-router-dom';
 import BookingCalendar from '../components/BookingCalendar';
 import TimeSlotPicker from '../components/TimeSlotPicker';
 import BookingForm from '../components/BookingForm';
 import BookingConfirmation from '../components/BookingConfirmation';
+import { SERVICES } from '../types/booking';
+import type { ServiceType } from '../types/booking';
 
 type BookingStep = 'select-date' | 'select-time' | 'fill-form' | 'confirmation';
 
 const BookingPage = () => {
+  const [searchParams] = useSearchParams();
+  const serviceParam = searchParams.get('service') as ServiceType | null;
+  const defaultService: ServiceType = serviceParam && ['group-sound-bath', 'therapy-1-1'].includes(serviceParam)
+    ? serviceParam
+    : 'group-sound-bath';
+
   const [step, setStep] = useState<BookingStep>('select-date');
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [bookingId, setBookingId] = useState<string>('');
+  const [bookedService, setBookedService] = useState<ServiceType>('group-sound-bath');
+  const [bookedPrice, setBookedPrice] = useState<number>(0);
 
   const handleDateSelect = (date: Date) => {
     setSelectedDate(date);
@@ -24,8 +35,10 @@ const BookingPage = () => {
     setStep('fill-form');
   };
 
-  const handleBookingSuccess = (id: string) => {
+  const handleBookingSuccess = (id: string, serviceType?: ServiceType, totalPrice?: number) => {
     setBookingId(id);
+    if (serviceType) setBookedService(serviceType);
+    if (totalPrice != null) setBookedPrice(totalPrice);
     setStep('confirmation');
   };
 
@@ -94,6 +107,7 @@ const BookingPage = () => {
             <BookingForm
               selectedDate={selectedDate}
               selectedTime={selectedTime}
+              defaultService={defaultService}
               onSuccess={handleBookingSuccess}
               onBack={() => setStep('select-time')}
             />
@@ -104,6 +118,8 @@ const BookingPage = () => {
               bookingId={bookingId}
               date={format(selectedDate, 'EEEE, dd/MM/yyyy')}
               time={selectedTime}
+              service={SERVICES.find(s => s.type === bookedService)?.name}
+              totalPrice={bookedPrice}
             />
           )}
         </div>
