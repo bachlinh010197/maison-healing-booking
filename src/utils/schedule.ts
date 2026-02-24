@@ -6,19 +6,19 @@ export const getTimeSlotsForDate = (date: Date): string[] => {
   
   const slots: string[] = [];
   
-  // Saturday (6) and Sunday (0): 11:00, 15:00, 17:30 (Group) + 19:00 (1:1)
+  // Saturday (6) and Sunday (0): 11:00, 15:00, 17:30 (Group) + 19:30 (1:1)
   if (day === 0 || day === 6) {
-    slots.push('11:00', '15:00', '17:30', '19:00');
+    slots.push('11:00', '15:00', '17:30', '19:30');
   } else {
-    // Monday-Friday: 17:30 (Group) + 19:00 (1:1)
-    slots.push('17:30', '19:00');
+    // Monday-Friday: 17:30 (Group) + 19:30 (1:1)
+    slots.push('17:30', '19:30');
   }
   
   return slots;
 };
 
 export const getServiceTypeForSlot = (time: string): ServiceType => {
-  return time === '19:00' ? 'therapy-1-1' : 'group-sound-bath';
+  return time === '19:30' ? 'therapy-1-1' : 'group-sound-bath';
 };
 
 export const formatDate = (date: Date): string => {

@@ -73,7 +73,7 @@ const BookingPage = () => {
             <div className="step-content">
               <h2>Select a Date</h2>
               <p className="step-description">
-                Group Sound Bath: weekends 11:00, 15:00, 17:30 · weekdays 17:30. Therapy 1:1: 19:00 every day.
+                Group Sound Bath: weekends 11:00, 15:00, 17:30 · weekdays 17:30. Therapy 1:1: 19:30 every day.
               </p>
               <BookingCalendar selectedDate={selectedDate} onSelectDate={handleDateSelect} />
             </div>

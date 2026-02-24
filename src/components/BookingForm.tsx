@@ -88,7 +88,7 @@ const BookingForm = ({ selectedDate, selectedTime, onSuccess, onBack }: BookingF
             <span className="service-info-name">{selectedService.name}</span>
             <span className="service-info-price">{formatPrice(selectedService.price)}/{selectedService.unit}</span>
             {autoServiceType === 'therapy-1-1' && (
-              <span className="service-option-note">(You can book session for yourself or you can share with your friend, price will not change)</span>
+              <span className="service-option-note">(You can book session for yourself or you can share with your friends, price will not change)</span>
             )}
           </div>
         </div>
@@ -179,6 +179,9 @@ const BookingForm = ({ selectedDate, selectedTime, onSuccess, onBack }: BookingF
             placeholder="Additional notes (optional)"
             rows={3}
           />
+          {autoServiceType === 'therapy-1-1' && (
+            <p className="form-hint">Please note number of people for your private session</p>
+          )}
         </div>
 
         {error && <div className="form-error">{error}</div>}

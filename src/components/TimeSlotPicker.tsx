@@ -17,7 +17,7 @@ const TimeSlotPicker = ({ selectedDate, selectedTime, onSelectTime }: TimeSlotPi
         return 'Afternoon';
       case '17:30':
         return 'Evening';
-      case '19:00':
+      case '19:30':
         return 'Evening';
       default:
         return '';

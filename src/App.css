@@ -1086,6 +1086,13 @@
   resize: vertical;
 }
 
+.form-hint {
+  font-size: 0.8rem;
+  color: var(--color-gold);
+  font-style: italic;
+  margin-top: 0.4rem;
+}
+
 .form-error {
   background-color: rgba(192, 57, 43, 0.08);
   color: var(--color-error);
