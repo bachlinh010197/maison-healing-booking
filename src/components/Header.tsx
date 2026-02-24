@@ -1,45 +1,82 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
+import LoginModal from './LoginModal';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
   const location = useLocation();
+  const { user, logout } = useAuth();
+
+  const handleLogout = async () => {
+    await logout();
+    setMenuOpen(false);
+  };
 
   return (
-    <header className="header">
-      <div className="header-container">
-        <Link to="/" className="logo">
-          <span className="logo-text">Maison Healing</span>
-        </Link>
-
-        <button 
-          className={`menu-toggle ${menuOpen ? 'active' : ''}`}
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-
-        <nav className={`nav ${menuOpen ? 'open' : ''}`}>
-          <Link 
-            to="/" 
-            className={location.pathname === '/' ? 'active' : ''}
-            onClick={() => setMenuOpen(false)}
-          >
-            Trang chủ
+    <>
+      <header className="header">
+        <div className="header-container">
+          <Link to="/" className="logo">
+            <span className="logo-text">Maison Healing</span>
           </Link>
-          <Link 
-            to="/booking" 
-            className={location.pathname === '/booking' ? 'active' : ''}
-            onClick={() => setMenuOpen(false)}
+
+          <button 
+            className={`menu-toggle ${menuOpen ? 'active' : ''}`}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
           >
-            Đặt lịch
-          </Link>
-        </nav>
-      </div>
-    </header>
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <nav className={`nav ${menuOpen ? 'open' : ''}`}>
+            <Link 
+              to="/" 
+              className={location.pathname === '/' ? 'active' : ''}
+              onClick={() => setMenuOpen(false)}
+            >
+              Trang chủ
+            </Link>
+            <Link 
+              to="/booking" 
+              className={location.pathname === '/booking' ? 'active' : ''}
+              onClick={() => setMenuOpen(false)}
+            >
+              Đặt lịch
+            </Link>
+            {user?.role === 'admin' && (
+              <Link
+                to="/admin"
+                className={location.pathname === '/admin' ? 'active' : ''}
+                onClick={() => setMenuOpen(false)}
+              >
+                Quản lý
+              </Link>
+            )}
+          </nav>
+
+          <div className="header-auth">
+            {user ? (
+              <div className="user-menu">
+                <span className="user-name">{user.displayName}</span>
+                <button className="btn-logout" onClick={handleLogout}>
+                  Đăng xuất
+                </button>
+              </div>
+            ) : (
+              <button className="btn-login" onClick={() => setShowLogin(true)}>
+                Đăng nhập
+              </button>
+            )}
+          </div>
+        </div>
+      </header>
+
+      {showLogin && <LoginModal onClose={() => setShowLogin(false)} />}
+    </>
   );
 };
 
