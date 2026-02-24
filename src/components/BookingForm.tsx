@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { format } from 'date-fns';
-import { vi } from 'date-fns/locale';
+import { enUS } from 'date-fns/locale';
 import { useBooking } from '../hooks/useBooking';
 import { formatDate } from '../utils/schedule';
 
@@ -46,26 +46,26 @@ const BookingForm = ({ selectedDate, selectedTime, onSuccess, onBack }: BookingF
   return (
     <div className="booking-form-container">
       <div className="booking-summary">
-        <h3>Thông tin buổi nghe chuông</h3>
+        <h3>Session Details</h3>
         <div className="summary-details">
           <div className="summary-item">
-            <span className="summary-label">Ngày</span>
+            <span className="summary-label">Date</span>
             <span className="summary-value">
-              {format(selectedDate, 'EEEE, dd/MM/yyyy', { locale: vi })}
+              {format(selectedDate, 'EEEE, dd/MM/yyyy', { locale: enUS })}
             </span>
           </div>
           <div className="summary-item">
-            <span className="summary-label">Giờ</span>
+            <span className="summary-label">Time</span>
             <span className="summary-value">{selectedTime}</span>
           </div>
         </div>
       </div>
 
       <form onSubmit={handleSubmit} className="booking-form">
-        <h3>Thông tin cá nhân</h3>
+        <h3>Personal Information</h3>
         
         <div className="form-group">
-          <label htmlFor="name">Họ và tên *</label>
+          <label htmlFor="name">Full Name *</label>
           <input
             type="text"
             id="name"
@@ -73,7 +73,7 @@ const BookingForm = ({ selectedDate, selectedTime, onSuccess, onBack }: BookingF
             value={formData.name}
             onChange={handleChange}
             required
-            placeholder="Nhập họ và tên"
+            placeholder="Enter your full name"
           />
         </div>
 
@@ -86,12 +86,12 @@ const BookingForm = ({ selectedDate, selectedTime, onSuccess, onBack }: BookingF
             value={formData.email}
             onChange={handleChange}
             required
-            placeholder="Nhập email"
+            placeholder="Enter your email"
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="phone">Số điện thoại *</label>
+          <label htmlFor="phone">Phone Number *</label>
           <input
             type="tel"
             id="phone"
@@ -99,12 +99,12 @@ const BookingForm = ({ selectedDate, selectedTime, onSuccess, onBack }: BookingF
             value={formData.phone}
             onChange={handleChange}
             required
-            placeholder="Nhập số điện thoại"
+            placeholder="Enter your phone number"
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="numberOfGuests">Số người</label>
+          <label htmlFor="numberOfGuests">Number of Guests</label>
           <select
             id="numberOfGuests"
             name="numberOfGuests"
@@ -113,20 +113,20 @@ const BookingForm = ({ selectedDate, selectedTime, onSuccess, onBack }: BookingF
           >
             {[1, 2, 3, 4, 5].map((n) => (
               <option key={n} value={n}>
-                {n} người
+                {`${n} ${n === 1 ? 'guest' : 'guests'}`}
               </option>
             ))}
           </select>
         </div>
 
         <div className="form-group">
-          <label htmlFor="notes">Ghi chú</label>
+          <label htmlFor="notes">Notes</label>
           <textarea
             id="notes"
             name="notes"
             value={formData.notes}
             onChange={handleChange}
-            placeholder="Ghi chú thêm (không bắt buộc)"
+            placeholder="Additional notes (optional)"
             rows={3}
           />
         </div>
@@ -135,10 +135,10 @@ const BookingForm = ({ selectedDate, selectedTime, onSuccess, onBack }: BookingF
 
         <div className="form-actions">
           <button type="button" className="btn-secondary" onClick={onBack}>
-            Quay lại
+            Go Back
           </button>
           <button type="submit" className="btn-primary" disabled={loading}>
-            {loading ? 'Đang xử lý...' : 'Xác nhận đặt lịch'}
+            {loading ? 'Processing...' : 'Confirm Booking'}
           </button>
         </div>
       </form>

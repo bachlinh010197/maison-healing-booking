@@ -32,16 +32,16 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
         case 'auth/user-not-found':
         case 'auth/wrong-password':
         case 'auth/invalid-credential':
-          setError('Email hoặc mật khẩu không đúng.');
+          setError('Invalid email or password.');
           break;
         case 'auth/email-already-in-use':
-          setError('Email này đã được sử dụng.');
+          setError('This email is already in use.');
           break;
         case 'auth/weak-password':
-          setError('Mật khẩu phải có ít nhất 6 ký tự.');
+          setError('Password must be at least 6 characters.');
           break;
         default:
-          setError('Đã xảy ra lỗi. Vui lòng thử lại.');
+          setError('An error occurred. Please try again.');
       }
     } finally {
       setLoading(false);
@@ -52,19 +52,19 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close" onClick={onClose}>×</button>
-        <h2>{isRegister ? 'Đăng ký' : 'Đăng nhập'}</h2>
+        <h2>{isRegister ? 'Sign Up' : 'Sign In'}</h2>
 
         <form onSubmit={handleSubmit} className="login-form">
           {isRegister && (
             <div className="form-group">
-              <label htmlFor="displayName">Họ và tên</label>
+              <label htmlFor="displayName">Full Name</label>
               <input
                 type="text"
                 id="displayName"
                 value={displayName}
                 onChange={(e) => setDisplayName(e.target.value)}
                 required
-                placeholder="Nhập họ và tên"
+                placeholder="Enter your full name"
               />
             </div>
           )}
@@ -77,19 +77,19 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              placeholder="Nhập email"
+              placeholder="Enter your email"
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="loginPassword">Mật khẩu</label>
+            <label htmlFor="loginPassword">Password</label>
             <input
               type="password"
               id="loginPassword"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              placeholder="Nhập mật khẩu"
+              placeholder="Enter your password"
               minLength={6}
             />
           </div>
@@ -97,23 +97,23 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
           {error && <div className="form-error">{error}</div>}
 
           <button type="submit" className="btn-primary login-btn" disabled={loading}>
-            {loading ? 'Đang xử lý...' : isRegister ? 'Đăng ký' : 'Đăng nhập'}
+            {loading ? 'Processing...' : isRegister ? 'Sign Up' : 'Sign In'}
           </button>
         </form>
 
         <div className="login-toggle">
           {isRegister ? (
             <p>
-              Đã có tài khoản?{' '}
+              Already have an account?{' '}
               <button type="button" onClick={() => { setIsRegister(false); setError(''); }}>
-                Đăng nhập
+                Sign In
               </button>
             </p>
           ) : (
             <p>
-              Chưa có tài khoản?{' '}
+              Don't have an account?{' '}
               <button type="button" onClick={() => { setIsRegister(true); setError(''); }}>
-                Đăng ký
+                Sign Up
               </button>
             </p>
           )}

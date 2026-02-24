@@ -46,7 +46,7 @@ const AdminPage = () => {
   };
 
   if (authLoading) {
-    return <div className="admin-loading">Đang tải...</div>;
+    return <div className="admin-loading">Loading...</div>;
   }
 
   if (!user || user.role !== 'admin') {
@@ -59,9 +59,9 @@ const AdminPage = () => {
 
   const statusLabel = (status: string) => {
     switch (status) {
-      case 'confirmed': return 'Đã xác nhận';
-      case 'cancelled': return 'Đã hủy';
-      case 'pending': return 'Chờ xử lý';
+      case 'confirmed': return 'Confirmed';
+      case 'cancelled': return 'Cancelled';
+      case 'pending': return 'Pending';
       default: return status;
     }
   };
@@ -69,8 +69,8 @@ const AdminPage = () => {
   return (
     <div className="admin-page">
       <div className="admin-header">
-        <h1>Quản lý đặt lịch</h1>
-        <p>Tổng cộng: {bookings.length} lượt đặt</p>
+        <h1>Booking Management</h1>
+        <p>Total: {bookings.length} bookings</p>
       </div>
 
       <div className="admin-container">
@@ -79,40 +79,40 @@ const AdminPage = () => {
             className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
             onClick={() => setFilter('all')}
           >
-            Tất cả ({bookings.length})
+            All ({bookings.length})
           </button>
           <button
             className={`filter-btn ${filter === 'confirmed' ? 'active' : ''}`}
             onClick={() => setFilter('confirmed')}
           >
-            Đã xác nhận ({bookings.filter((b) => b.status === 'confirmed').length})
+            Confirmed ({bookings.filter((b) => b.status === 'confirmed').length})
           </button>
           <button
             className={`filter-btn ${filter === 'cancelled' ? 'active' : ''}`}
             onClick={() => setFilter('cancelled')}
           >
-            Đã hủy ({bookings.filter((b) => b.status === 'cancelled').length})
+            Cancelled ({bookings.filter((b) => b.status === 'cancelled').length})
           </button>
         </div>
 
         {loading ? (
-          <div className="admin-loading">Đang tải danh sách...</div>
+          <div className="admin-loading">Loading bookings...</div>
         ) : filteredBookings.length === 0 ? (
-          <div className="admin-empty">Không có lịch đặt nào.</div>
+          <div className="admin-empty">No bookings found.</div>
         ) : (
           <div className="admin-table-wrapper">
             <table className="admin-table">
               <thead>
                 <tr>
-                  <th>Ngày</th>
-                  <th>Giờ</th>
-                  <th>Họ tên</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Name</th>
                   <th>Email</th>
-                  <th>SĐT</th>
-                  <th>Số người</th>
-                  <th>Ghi chú</th>
-                  <th>Trạng thái</th>
-                  <th>Hành động</th>
+                  <th>Phone</th>
+                  <th>Guests</th>
+                  <th>Notes</th>
+                  <th>Status</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -136,14 +136,14 @@ const AdminPage = () => {
                           className="action-btn cancel"
                           onClick={() => handleStatusChange(booking.id!, 'cancelled')}
                         >
-                          Hủy
+                          Cancel
                         </button>
                       ) : booking.status === 'cancelled' ? (
                         <button
                           className="action-btn confirm"
                           onClick={() => handleStatusChange(booking.id!, 'confirmed')}
                         >
-                          Khôi phục
+                          Restore
                         </button>
                       ) : null}
                     </td>

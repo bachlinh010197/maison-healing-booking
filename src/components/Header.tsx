@@ -38,14 +38,14 @@ const Header = () => {
               className={location.pathname === '/' ? 'active' : ''}
               onClick={() => setMenuOpen(false)}
             >
-              Trang chủ
+              Home
             </Link>
             <Link 
               to="/booking" 
               className={location.pathname === '/booking' ? 'active' : ''}
               onClick={() => setMenuOpen(false)}
             >
-              Đặt lịch
+              Booking
             </Link>
             {user?.role === 'admin' && (
               <Link
@@ -53,7 +53,7 @@ const Header = () => {
                 className={location.pathname === '/admin' ? 'active' : ''}
                 onClick={() => setMenuOpen(false)}
               >
-                Quản lý
+                Admin
               </Link>
             )}
           </nav>
@@ -63,12 +63,12 @@ const Header = () => {
               <div className="user-menu">
                 <span className="user-name">{user.displayName}</span>
                 <button className="btn-logout" onClick={handleLogout}>
-                  Đăng xuất
+                  Sign Out
                 </button>
               </div>
             ) : (
               <button className="btn-login" onClick={() => setShowLogin(true)}>
-                Đăng nhập
+                Sign In
               </button>
             )}
           </div>

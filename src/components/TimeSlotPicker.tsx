@@ -12,11 +12,11 @@ const TimeSlotPicker = ({ selectedDate, selectedTime, onSelectTime }: TimeSlotPi
   const getSlotLabel = (time: string) => {
     switch (time) {
       case '11:00':
-        return 'Buổi sáng';
+        return 'Morning';
       case '15:00':
-        return 'Buổi chiều';
+        return 'Afternoon';
       case '17:30':
-        return 'Buổi tối';
+        return 'Evening';
       default:
         return '';
     }
@@ -24,7 +24,7 @@ const TimeSlotPicker = ({ selectedDate, selectedTime, onSelectTime }: TimeSlotPi
 
   return (
     <div className="time-slot-picker">
-      <h3>Chọn khung giờ</h3>
+      <h3>Select a Time Slot</h3>
       <div className="time-slots">
         {slots.map((time) => (
           <button

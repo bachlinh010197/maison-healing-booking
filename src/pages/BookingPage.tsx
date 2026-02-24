@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { format } from 'date-fns';
-import { vi } from 'date-fns/locale';
 import BookingCalendar from '../components/BookingCalendar';
 import TimeSlotPicker from '../components/TimeSlotPicker';
 import BookingForm from '../components/BookingForm';
@@ -31,10 +30,10 @@ const BookingPage = () => {
   };
 
   const steps = [
-    { key: 'select-date', label: 'Chọn ngày', number: 1 },
-    { key: 'select-time', label: 'Chọn giờ', number: 2 },
-    { key: 'fill-form', label: 'Thông tin', number: 3 },
-    { key: 'confirmation', label: 'Xác nhận', number: 4 },
+    { key: 'select-date', label: 'Select Date', number: 1 },
+    { key: 'select-time', label: 'Select Time', number: 2 },
+    { key: 'fill-form', label: 'Details', number: 3 },
+    { key: 'confirmation', label: 'Confirm', number: 4 },
   ];
 
   const currentStepIndex = steps.findIndex((s) => s.key === step);
@@ -42,8 +41,8 @@ const BookingPage = () => {
   return (
     <div className="booking-page">
       <div className="booking-hero">
-        <h1>Đặt lịch nghe chuông</h1>
-        <p>Chọn ngày và giờ phù hợp để bắt đầu hành trình chữa lành của bạn</p>
+        <h1>Book a Sound Healing Session</h1>
+        <p>Choose a date and time to begin your healing journey</p>
       </div>
 
       <div className="booking-container">
@@ -66,9 +65,9 @@ const BookingPage = () => {
         <div className="booking-content">
           {step === 'select-date' && (
             <div className="step-content">
-              <h2>Chọn ngày trị liệu</h2>
+              <h2>Select a Date</h2>
               <p className="step-description">
-                Cuối tuần có 3 khung giờ (11:00, 15:00, 17:30). Các ngày trong tuần có 1 khung giờ (17:30).
+                Weekends have 3 time slots (11:00, 15:00, 17:30). Weekdays have 1 time slot (17:30).
               </p>
               <BookingCalendar selectedDate={selectedDate} onSelectDate={handleDateSelect} />
             </div>
@@ -76,9 +75,9 @@ const BookingPage = () => {
 
           {step === 'select-time' && selectedDate && (
             <div className="step-content">
-              <h2>Chọn khung giờ</h2>
+              <h2>Select a Time Slot</h2>
               <p className="step-description">
-                Ngày đã chọn: {format(selectedDate, 'EEEE, dd/MM/yyyy', { locale: vi })}
+                Selected date: {format(selectedDate, 'EEEE, dd/MM/yyyy')}
               </p>
               <TimeSlotPicker
                 selectedDate={selectedDate}
@@ -86,7 +85,7 @@ const BookingPage = () => {
                 onSelectTime={handleTimeSelect}
               />
               <button className="btn-secondary" onClick={() => setStep('select-date')}>
-                ← Chọn ngày khác
+                ← Choose Another Date
               </button>
             </div>
           )}
@@ -103,7 +102,7 @@ const BookingPage = () => {
           {step === 'confirmation' && selectedDate && selectedTime && (
             <BookingConfirmation
               bookingId={bookingId}
-              date={format(selectedDate, 'EEEE, dd/MM/yyyy', { locale: vi })}
+              date={format(selectedDate, 'EEEE, dd/MM/yyyy')}
               time={selectedTime}
             />
           )}

@@ -27,7 +27,7 @@ export const useBooking = () => {
         }, 0);
 
       if (totalGuests + bookingData.numberOfGuests > 20) {
-        setError('Xin lỗi, khung giờ này đã đầy. Vui lòng chọn khung giờ khác.');
+        setError('Sorry, this time slot is full. Please choose another time slot.');
         setLoading(false);
         return null;
       }
@@ -42,7 +42,7 @@ export const useBooking = () => {
       return docRef.id;
     } catch (err) {
       console.error('Booking error:', err);
-      setError('Đã xảy ra lỗi. Vui lòng thử lại sau.');
+      setError('An error occurred. Please try again later.');
       setLoading(false);
       return null;
     }

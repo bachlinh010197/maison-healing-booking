@@ -8,12 +8,12 @@ const Footer = () => {
         </div>
         <div className="footer-info">
           <div className="footer-section">
-            <h4>Lịch trình</h4>
-            <p>Thứ 2 - Thứ 6: 17:30</p>
-            <p>Thứ 7 - Chủ nhật: 11:00, 15:00, 17:30</p>
+            <h4>Schedule</h4>
+            <p>Mon - Fri: 17:30</p>
+            <p>Sat - Sun: 11:00, 15:00, 17:30</p>
           </div>
           <div className="footer-section">
-            <h4>Liên hệ</h4>
+            <h4>Contact</h4>
             <p>Email: bachdiem1993@gmail.com</p>
             <p>WhatsApp/Zalo/Phone: +84 336256356</p>
           </div>

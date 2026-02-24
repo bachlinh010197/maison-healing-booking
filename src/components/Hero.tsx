@@ -5,14 +5,14 @@ const Hero = () => {
     <section className="hero">
       <div className="hero-overlay"></div>
       <div className="hero-content">
-        <span className="hero-subtitle">✦ Chữa lành bằng âm thanh ✦</span>
+        <span className="hero-subtitle">✦ Healing Through Sound ✦</span>
         <h1>Maison Healing</h1>
         <p className="hero-description">
-          Khám phá hành trình chữa lành sâu sắc qua âm thanh trị liệu. 
-          Trải nghiệm sự kết hợp hoàn hảo giữa Gông, chuông thạch anh, chuông kim loại Nepal, chuông gió, trống sóng biển, mang đến sự thư giãn tuyệt đối cho tâm hồn và cơ thể.
+          Discover a profound healing journey through therapeutic sound. 
+          Experience the perfect harmony of Gongs, crystal singing bowls, Nepalese metal bells, wind chimes, and ocean drums, bringing absolute relaxation to your mind and body.
         </p>
         <Link to="/booking" className="btn-primary">
-          Đặt lịch ngay
+          Book Now
         </Link>
       </div>
     </section>

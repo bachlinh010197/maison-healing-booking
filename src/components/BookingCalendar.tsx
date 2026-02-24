@@ -12,7 +12,7 @@ import {
   isSameDay,
   isToday,
 } from 'date-fns';
-import { vi } from 'date-fns/locale';
+
 import { isDateInPast } from '../utils/schedule';
 
 interface BookingCalendarProps {
@@ -23,7 +23,7 @@ interface BookingCalendarProps {
 const BookingCalendar = ({ selectedDate, onSelectDate }: BookingCalendarProps) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
-  const weekDays = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
+  const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   const renderDays = () => {
     const monthStart = startOfMonth(currentMonth);
@@ -59,10 +59,10 @@ const BookingCalendar = ({ selectedDate, onSelectDate }: BookingCalendarProps) =
         >
           <span className="day-number">{format(currentDay, 'd')}</span>
           {isWeekendDay && inMonth && !inPast && (
-            <span className="slot-indicator">3 suất</span>
+            <span className="slot-indicator">3 slots</span>
           )}
           {!isWeekendDay && inMonth && !inPast && (
-            <span className="slot-indicator">1 suất</span>
+            <span className="slot-indicator">1 slot</span>
           )}
         </button>
       );
@@ -79,7 +79,7 @@ const BookingCalendar = ({ selectedDate, onSelectDate }: BookingCalendarProps) =
         <button onClick={() => setCurrentMonth(subMonths(currentMonth, 1))} className="month-nav">
           ‹
         </button>
-        <h3>{format(currentMonth, 'MMMM yyyy', { locale: vi })}</h3>
+        <h3>{format(currentMonth, 'MMMM yyyy')}</h3>
         <button onClick={() => setCurrentMonth(addMonths(currentMonth, 1))} className="month-nav">
           ›
         </button>
