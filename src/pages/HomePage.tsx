@@ -19,7 +19,7 @@ const HomePage = () => {
               <span className="section-subtitle">✦ About Us ✦</span>
               <h2>Sound Healing Therapy</h2>
               <p className="section-description">
-                Sound Healing is an ancient therapeutic method that uses vibrational frequencies from Gongs, crystal singing bowls, Nepalese metal bells, wind chimes, and ocean drums to bring the mind into a deep meditative state, release stress, and restore energy balance in the body.
+                Sound Healing is an ancient therapeutic method that uses vibrational frequencies from Gongs, singing bowls, wind chimes, and ocean drums to bring the mind into a deep meditative state, release stress, and restore energy balance in the body.
               </p>
             </div>
           </div>
@@ -38,7 +38,7 @@ const HomePage = () => {
               <div className="service-card-body">
                 <h3>Group Sound Bath</h3>
                 <p>
-                  Experience a group sound bath with Gongs, crystal singing bowls, Nepalese metal bells, wind chimes, and ocean drums. Absolute relaxation in a peaceful space.
+                  Experience a group sound bath with Gongs, singing bowls, wind chimes, and ocean drums. Absolute relaxation in a peaceful space.
                 </p>
               </div>
             </div>
@@ -62,7 +62,8 @@ const HomePage = () => {
           <span className="section-subtitle">✦ Training ✦</span>
           <h2>Course Registration</h2>
           <p className="section-description">
-            Sound therapy training using ancient Nepalese methods. 2 courses available: Basic (20h) and Advanced (35h). Get 20% off when you register 10 days before the course starts.
+            Sound therapy training using ancient Nepalese methods. 2 courses available: Basic (20h) and Advanced (35h).
+            Get off when you register 10 days before the course starts.
           </p>
           <Link to="/courses" className="btn-primary" style={{ marginTop: '2rem' }}>
             View Details

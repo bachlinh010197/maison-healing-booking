@@ -122,17 +122,6 @@ const CoursesPage = () => {
                 <h3>4. Psychological counseling therapy using the SCORE model</h3>
               </div>
             </div>
-
-            <div className="course-benefits">
-              <div className="benefit-item">
-                <span className="benefit-icon">🎓</span>
-                <span><strong>9% discount</strong> for students enrolling in the Master Teacher course</span>
-              </div>
-              <div className="benefit-item highlight">
-                <span className="benefit-icon">♻️</span>
-                <span><strong>Free re-enrollment</strong> in future courses</span>
-              </div>
-            </div>
           </div>
         )}
 

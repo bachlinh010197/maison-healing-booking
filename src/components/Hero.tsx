@@ -7,10 +7,10 @@ const Hero = () => {
       <div className="hero-overlay"></div>
       <div className="hero-content">
         <span className="hero-subtitle">✦ Healing Through Sound ✦</span>
-        <h1>SoundHealing</h1>
+        <h1>Maison SoundHealing</h1>
         <p className="hero-description">
           Discover a profound healing journey through therapeutic sound. 
-          Experience the perfect harmony of Gongs, crystal singing bowls, Nepalese metal bells, wind chimes, and ocean drums, bringing absolute relaxation to your mind and body.
+          Experience the perfect harmony of Gongs, singing bowls, wind chimes, and ocean drums, bringing absolute relaxation to your mind and body.
         </p>
         <Link to="/booking" className="btn-primary">
           Book Now

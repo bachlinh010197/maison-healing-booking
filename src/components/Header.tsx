@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import LoginModal from './LoginModal';
+import logo from '../assets/logo.jpg';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -19,7 +20,8 @@ const Header = () => {
       <header className="header">
         <div className="header-container">
           <Link to="/" className="logo">
-            <span className="logo-text">SoundHealing</span>
+            <img src={logo} alt="Maison SoundHealing" className="logo-img" />
+            <span className="logo-text">Maison SoundHealing</span>
           </Link>
 
           <button 
