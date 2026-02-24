@@ -39,6 +39,19 @@ const HomePage = () => {
         </div>
       </section>
 
+      <section className="section courses-cta-section">
+        <div className="container">
+          <span className="section-subtitle">✦ Training ✦</span>
+          <h2>Course Registration</h2>
+          <p className="section-description">
+            Sound therapy training using ancient Nepalese methods. 2 courses available: Basic (20h) and Advanced (35h). Get 20% off when you register 10 days before the course starts.
+          </p>
+          <Link to="/courses" className="btn-primary" style={{ marginTop: '2rem' }}>
+            View Details
+          </Link>
+        </div>
+      </section>
+
       <section className="section schedule-section">
         <div className="container">
           <span className="section-subtitle">✦ Schedule ✦</span>

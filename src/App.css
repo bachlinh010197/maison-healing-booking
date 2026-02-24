@@ -1191,6 +1191,283 @@
 }
 
 /* ========================= */
+/* COURSES PAGE              */
+/* ========================= */
+
+.courses-page {
+  margin-top: 70px;
+}
+
+.courses-hero {
+  background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-primary-dark) 100%);
+  padding: 4rem 1.5rem;
+  text-align: center;
+}
+
+.courses-hero h1 {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  color: var(--color-cream);
+  margin-bottom: 0.75rem;
+  font-weight: 300;
+}
+
+.courses-hero p {
+  color: var(--color-cream-dark);
+  font-size: 1.1rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+.courses-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.courses-promo {
+  background: linear-gradient(135deg, #FFF8E1 0%, #FFF3C4 100%);
+  border: 1px solid var(--color-gold);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.promo-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 0.5rem;
+}
+
+.courses-promo p {
+  color: var(--color-dark);
+  font-size: 1rem;
+}
+
+.courses-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.course-tab {
+  flex: 1;
+  padding: 1.25rem 1.5rem;
+  background-color: var(--color-white);
+  border: 2px solid var(--color-cream-dark);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.course-tab:hover {
+  border-color: var(--color-primary-light);
+}
+
+.course-tab.active {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
+}
+
+.tab-name {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--color-dark);
+  margin-bottom: 0.25rem;
+}
+
+.course-tab.active .tab-name {
+  color: var(--color-white);
+}
+
+.tab-hours {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: var(--color-text-light);
+}
+
+.course-tab.active .tab-hours {
+  color: var(--color-cream-dark);
+}
+
+.course-detail {
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 2rem;
+}
+
+.course-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--color-cream-dark);
+}
+
+.course-header h2 {
+  font-size: 2rem;
+  color: var(--color-dark);
+  margin-bottom: 0.5rem;
+}
+
+.course-alt-name {
+  font-size: 1rem;
+  color: var(--color-primary);
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.course-meta {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.meta-item {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  font-weight: 400;
+}
+
+.course-curriculum {
+  margin-bottom: 2rem;
+}
+
+.curriculum-section {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-cream);
+}
+
+.curriculum-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.curriculum-section h3 {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.curriculum-desc {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
+.curriculum-list {
+  list-style: none;
+  padding: 0;
+}
+
+.curriculum-list li {
+  position: relative;
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.curriculum-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0.25rem;
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+.course-benefits {
+  background-color: var(--color-cream);
+  border-radius: var(--radius-md);
+  padding: 1.5rem 2rem;
+  margin-top: 2rem;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+
+.benefit-item.highlight {
+  color: var(--color-success);
+  font-weight: 500;
+}
+
+.benefit-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.courses-contact {
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+
+.courses-contact h3 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-dark);
+}
+
+.courses-contact > p {
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-info {
+  margin-bottom: 1rem;
+}
+
+.contact-item {
+  display: inline-block;
+  padding: 0.875rem 2.5rem;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.contact-address {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+}
+
+/* ========================= */
 /* RESPONSIVE                */
 /* ========================= */
 
@@ -1322,6 +1599,27 @@
 
   .section h2 {
     font-size: 2rem;
+  }
+
+  .courses-hero h1 {
+    font-size: 2rem;
+  }
+
+  .courses-tabs {
+    flex-direction: column;
+  }
+
+  .course-detail {
+    padding: 1.5rem;
+  }
+
+  .course-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .courses-contact {
+    padding: 1.5rem;
   }
 }
 

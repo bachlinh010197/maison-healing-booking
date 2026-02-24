@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import BookingPage from './pages/BookingPage';
 import AdminPage from './pages/AdminPage';
+import CoursesPage from './pages/CoursesPage';
 import './App.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/booking" element={<BookingPage />} />
+              <Route path="/courses" element={<CoursesPage />} />
               <Route path="/admin" element={<AdminPage />} />
             </Routes>
           </main>
