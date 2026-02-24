@@ -2,14 +2,13 @@ import { useState, useMemo } from 'react';
 import { format } from 'date-fns';
 import { enUS } from 'date-fns/locale';
 import { useBooking } from '../hooks/useBooking';
-import { formatDate } from '../utils/schedule';
+import { formatDate, getServiceTypeForSlot } from '../utils/schedule';
 import { SERVICES } from '../types/booking';
 import type { ServiceType } from '../types/booking';
 
 interface BookingFormProps {
   selectedDate: Date;
   selectedTime: string;
-  defaultService?: ServiceType;
   onSuccess: (bookingId: string, serviceType?: ServiceType, totalPrice?: number) => void;
   onBack: () => void;
 }
@@ -18,13 +17,14 @@ const formatPrice = (price: number) => {
   return new Intl.NumberFormat('vi-VN').format(price) + ' VND';
 };
 
-const BookingForm = ({ selectedDate, selectedTime, defaultService, onSuccess, onBack }: BookingFormProps) => {
+const BookingForm = ({ selectedDate, selectedTime, onSuccess, onBack }: BookingFormProps) => {
   const { createBooking, loading, error } = useBooking();
+  const autoServiceType = getServiceTypeForSlot(selectedTime);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    serviceType: (defaultService || 'group-sound-bath') as ServiceType,
+    serviceType: autoServiceType,
     numberOfGuests: 1,
     notes: '',
   });
@@ -64,14 +64,6 @@ const BookingForm = ({ selectedDate, selectedTime, defaultService, onSuccess, on
     }));
   };
 
-  const handleServiceSelect = (type: ServiceType) => {
-    setFormData((prev) => ({
-      ...prev,
-      serviceType: type,
-      numberOfGuests: type === 'therapy-1-1' ? 1 : prev.numberOfGuests,
-    }));
-  };
-
   return (
     <div className="booking-form-container">
       <div className="booking-summary">
@@ -91,27 +83,14 @@ const BookingForm = ({ selectedDate, selectedTime, defaultService, onSuccess, on
       </div>
 
       <form onSubmit={handleSubmit} className="booking-form">
-        <h3>Select Service</h3>
-
-        <div className="service-options">
-          {SERVICES.map((service) => (
-            <div
-              key={service.type}
-              className={`service-option ${formData.serviceType === service.type ? 'selected' : ''}`}
-              onClick={() => handleServiceSelect(service.type)}
-            >
-              <div className="service-option-radio">
-                <div className="radio-dot" />
-              </div>
-              <div className="service-option-info">
-                <span className="service-option-name">{service.name}</span>
-                <span className="service-option-price">{formatPrice(service.price)}/{service.unit}</span>
-                {service.type === 'therapy-1-1' && (
-                  <span className="service-option-note">(You can book session for yourself or you can share with your friend, price will not change)</span>
-                )}
-              </div>
-            </div>
-          ))}
+        <div className="service-info-banner">
+          <div className="service-info-details">
+            <span className="service-info-name">{selectedService.name}</span>
+            <span className="service-info-price">{formatPrice(selectedService.price)}/{selectedService.unit}</span>
+            {autoServiceType === 'therapy-1-1' && (
+              <span className="service-option-note">(You can book session for yourself or you can share with your friend, price will not change)</span>
+            )}
+          </div>
         </div>
 
         <h3>Personal Information</h3>

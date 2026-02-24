@@ -813,6 +813,33 @@
   color: var(--color-cream-dark);
 }
 
+.time-service-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  margin-top: 0.5rem;
+}
+
+.tag-group {
+  background-color: rgba(139, 115, 85, 0.15);
+  color: var(--color-primary);
+}
+
+.tag-therapy {
+  background-color: rgba(197, 165, 114, 0.2);
+  color: var(--color-gold);
+}
+
+.time-slot.selected .tag-group,
+.time-slot.selected .tag-therapy {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--color-white);
+}
+
 /* ========================= */
 /* BOOKING FORM              */
 /* ========================= */
@@ -820,6 +847,33 @@
 .booking-form-container {
   max-width: 600px;
   margin: 0 auto;
+}
+
+.service-info-banner {
+  background: linear-gradient(135deg, var(--color-cream) 0%, var(--color-cream-dark) 100%);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2rem;
+  border-left: 4px solid var(--color-primary);
+}
+
+.service-info-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.service-info-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  font-family: var(--font-heading);
+}
+
+.service-info-price {
+  font-size: 0.95rem;
+  color: var(--color-gold);
+  font-weight: 500;
 }
 
 .booking-summary {

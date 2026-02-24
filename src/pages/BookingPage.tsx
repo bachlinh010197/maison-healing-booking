@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { format } from 'date-fns';
-import { useSearchParams } from 'react-router-dom';
 import BookingCalendar from '../components/BookingCalendar';
 import TimeSlotPicker from '../components/TimeSlotPicker';
 import BookingForm from '../components/BookingForm';
@@ -11,12 +10,6 @@ import type { ServiceType } from '../types/booking';
 type BookingStep = 'select-date' | 'select-time' | 'fill-form' | 'confirmation';
 
 const BookingPage = () => {
-  const [searchParams] = useSearchParams();
-  const serviceParam = searchParams.get('service') as ServiceType | null;
-  const defaultService: ServiceType = serviceParam && ['group-sound-bath', 'therapy-1-1'].includes(serviceParam)
-    ? serviceParam
-    : 'group-sound-bath';
-
   const [step, setStep] = useState<BookingStep>('select-date');
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
@@ -80,7 +73,7 @@ const BookingPage = () => {
             <div className="step-content">
               <h2>Select a Date</h2>
               <p className="step-description">
-                Weekends have 3 time slots (11:00, 15:00, 17:30). Weekdays have 1 time slot (17:30).
+                Group Sound Bath: weekends 11:00, 15:00, 17:30 · weekdays 17:30. Therapy 1:1: 19:00 every day.
               </p>
               <BookingCalendar selectedDate={selectedDate} onSelectDate={handleDateSelect} />
             </div>
@@ -107,7 +100,6 @@ const BookingPage = () => {
             <BookingForm
               selectedDate={selectedDate}
               selectedTime={selectedTime}
-              defaultService={defaultService}
               onSuccess={handleBookingSuccess}
               onBack={() => setStep('select-time')}
             />

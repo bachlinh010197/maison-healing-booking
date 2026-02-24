@@ -31,7 +31,7 @@ const HomePage = () => {
           <span className="section-subtitle">✦ Experience ✦</span>
           <h2>Our Services</h2>
           <div className="services-grid">
-            <Link to="/booking?service=group-sound-bath" className="service-card service-card-link">
+            <Link to="/booking" className="service-card service-card-link">
               <div className="service-card-image">
                 <img src={serviceBathImg} alt="Group Sound Bath" />
               </div>
@@ -44,7 +44,7 @@ const HomePage = () => {
                 <span className="service-book-btn">Book Now →</span>
               </div>
             </Link>
-            <Link to="/booking?service=therapy-1-1" className="service-card service-card-link">
+            <Link to="/booking" className="service-card service-card-link">
               <div className="service-card-image">
                 <img src={serviceOneImg} alt="Soundhealing therapy 1:1" />
               </div>
