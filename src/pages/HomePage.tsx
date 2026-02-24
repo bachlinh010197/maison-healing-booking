@@ -50,7 +50,7 @@ const HomePage = () => {
               </div>
               <div className="service-card-body">
                 <h3>Soundhealing therapy 1:1</h3>
-                <span className="service-price">1,000,000 VND/session</span>
+                <span className="service-price">800,000 VND/session</span>
                 <p>
                   A personalized sound healing session, specially designed to meet your individual therapeutic needs.
                 </p>

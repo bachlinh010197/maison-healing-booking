@@ -14,7 +14,7 @@ export interface ServiceOption {
 
 export const SERVICES: ServiceOption[] = [
   { type: 'group-sound-bath', name: 'Group Sound Bath', price: 350000, unit: 'pax' },
-  { type: 'therapy-1-1', name: 'Soundhealing Therapy 1:1', price: 1000000, unit: 'session' },
+  { type: 'therapy-1-1', name: 'Soundhealing Therapy 1:1', price: 800000, unit: 'session' },
 ];
 
 export interface Booking {
