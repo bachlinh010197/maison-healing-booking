@@ -19,7 +19,7 @@ const Header = () => {
       <header className="header">
         <div className="header-container">
           <Link to="/" className="logo">
-            <span className="logo-text">Maison Healing</span>
+            <span className="logo-text">SoundHealing</span>
           </Link>
 
           <button 

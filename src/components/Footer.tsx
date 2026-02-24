@@ -19,7 +19,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} Maison Healing. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} SoundHealing. All rights reserved.</p>
         </div>
       </div>
     </footer>

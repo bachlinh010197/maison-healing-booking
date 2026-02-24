@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
+import aboutImg from '../assets/KYN_0002.jpg';
+import serviceBathImg from '../assets/KYN_0003.jpg';
+import serviceOneImg from '../assets/KYN_0004.jpg';
 
 const HomePage = () => {
   return (
@@ -8,11 +11,18 @@ const HomePage = () => {
 
       <section className="section about-section">
         <div className="container">
-          <span className="section-subtitle">✦ About Us ✦</span>
-          <h2>Sound Healing Therapy</h2>
-          <p className="section-description">
-            Sound Healing is an ancient therapeutic method that uses vibrational frequencies from Gongs, crystal singing bowls, Nepalese metal bells, wind chimes, and ocean drums to bring the mind into a deep meditative state, release stress, and restore energy balance in the body.
-          </p>
+          <div className="about-grid">
+            <div className="about-image">
+              <img src={aboutImg} alt="Sound Healing Therapy" />
+            </div>
+            <div className="about-text">
+              <span className="section-subtitle">✦ About Us ✦</span>
+              <h2>Sound Healing Therapy</h2>
+              <p className="section-description">
+                Sound Healing is an ancient therapeutic method that uses vibrational frequencies from Gongs, crystal singing bowls, Nepalese metal bells, wind chimes, and ocean drums to bring the mind into a deep meditative state, release stress, and restore energy balance in the body.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -22,18 +32,26 @@ const HomePage = () => {
           <h2>Our Services</h2>
           <div className="services-grid">
             <div className="service-card">
-              <div className="service-icon">🎵</div>
-              <h3>Group Sound Bath</h3>
-              <p>
-                Experience a group sound bath with Gongs, crystal singing bowls, Nepalese metal bells, wind chimes, and ocean drums. Absolute relaxation in a peaceful space.
-              </p>
+              <div className="service-card-image">
+                <img src={serviceBathImg} alt="Group Sound Bath" />
+              </div>
+              <div className="service-card-body">
+                <h3>Group Sound Bath</h3>
+                <p>
+                  Experience a group sound bath with Gongs, crystal singing bowls, Nepalese metal bells, wind chimes, and ocean drums. Absolute relaxation in a peaceful space.
+                </p>
+              </div>
             </div>
             <div className="service-card">
-              <div className="service-icon">🧘</div>
-              <h3>Soundhealing therapy 1:1</h3>
-              <p>
-                A personalized sound healing session, specially designed to meet your individual therapeutic needs.
-              </p>
+              <div className="service-card-image">
+                <img src={serviceOneImg} alt="Soundhealing therapy 1:1" />
+              </div>
+              <div className="service-card-body">
+                <h3>Soundhealing therapy 1:1</h3>
+                <p>
+                  A personalized sound healing session, specially designed to meet your individual therapeutic needs.
+                </p>
+              </div>
             </div>
           </div>
         </div>

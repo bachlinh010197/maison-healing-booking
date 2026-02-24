@@ -79,12 +79,6 @@ const CoursesPage = () => {
               </div>
             </div>
 
-            <div className="course-benefits">
-              <div className="benefit-item">
-                <span className="benefit-icon">🔔</span>
-                <span><strong>7% discount</strong> when students purchase bowls at ChangCo Healing</span>
-              </div>
-            </div>
           </div>
         )}
 
@@ -94,7 +88,7 @@ const CoursesPage = () => {
               <h2>Advanced Course Curriculum</h2>
               <p className="course-alt-name">SingingBowlCoach</p>
               <div className="course-meta">
-                <span className="meta-item">⏱ Duration: 2 consecutive days</span>
+                <span className="meta-item">⏱ Duration: 5 consecutive days</span>
                 <span className="meta-item">📚 35 hours of training</span>
               </div>
             </div>
@@ -131,10 +125,6 @@ const CoursesPage = () => {
 
             <div className="course-benefits">
               <div className="benefit-item">
-                <span className="benefit-icon">🔔</span>
-                <span><strong>7% discount</strong> when students purchase bowls at ChangCo Healing</span>
-              </div>
-              <div className="benefit-item">
                 <span className="benefit-icon">🎓</span>
                 <span><strong>9% discount</strong> for students enrolling in the Master Teacher course</span>
               </div>
@@ -150,11 +140,11 @@ const CoursesPage = () => {
           <h3>Course Registration</h3>
           <p>Contact us for consultation and registration</p>
           <div className="contact-info">
-            <a href="tel:09047188.79" className="contact-item">
-              📞 Hotline: 0904.7188.79
+            <a href="tel:0336256356" className="contact-item">
+              📞 Hotline: 0336256356
             </a>
           </div>
-          <p className="contact-address">📍 38B Tran Quoc Thao, Vo Thi Sau Ward, District 3, HCM City</p>
+          <p className="contact-address">📍 3A Che Lan Vien Street, Da Nang City</p>
         </div>
       </div>
     </div>

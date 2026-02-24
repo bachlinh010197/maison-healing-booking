@@ -12,7 +12,7 @@ const BookingConfirmation = ({ bookingId, date, time }: BookingConfirmationProps
       <div className="confirmation-icon">✓</div>
       <h2>Booking Confirmed!</h2>
       <p className="confirmation-message">
-        Thank you for booking with Maison Healing. We will send a confirmation to your email.
+        Thank you for booking with SoundHealing. We will send a confirmation to your email.
       </p>
       <div className="confirmation-details">
         <div className="detail-item">
