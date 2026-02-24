@@ -106,6 +106,9 @@ const BookingForm = ({ selectedDate, selectedTime, defaultService, onSuccess, on
               <div className="service-option-info">
                 <span className="service-option-name">{service.name}</span>
                 <span className="service-option-price">{formatPrice(service.price)}/{service.unit}</span>
+                {service.type === 'therapy-1-1' && (
+                  <span className="service-option-note">(You can book session for yourself or you can share with your friend, price will not change)</span>
+                )}
               </div>
             </div>
           ))}
