@@ -13,7 +13,7 @@ const BookingPage = () => {
   const [step, setStep] = useState<BookingStep>('select-date');
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
-  const [bookingId, setBookingId] = useState<string>('');
+  const [bookingCode, setBookingCode] = useState<string>('');
   const [bookedService, setBookedService] = useState<ServiceType>('group-sound-bath');
   const [bookedPrice, setBookedPrice] = useState<number>(0);
 
@@ -28,8 +28,8 @@ const BookingPage = () => {
     setStep('fill-form');
   };
 
-  const handleBookingSuccess = (id: string, serviceType?: ServiceType, totalPrice?: number) => {
-    setBookingId(id);
+  const handleBookingSuccess = (code: string, serviceType?: ServiceType, totalPrice?: number) => {
+    setBookingCode(code);
     if (serviceType) setBookedService(serviceType);
     if (totalPrice != null) setBookedPrice(totalPrice);
     setStep('confirmation');
@@ -107,7 +107,7 @@ const BookingPage = () => {
 
           {step === 'confirmation' && selectedDate && selectedTime && (
             <BookingConfirmation
-              bookingId={bookingId}
+              bookingCode={bookingCode}
               date={format(selectedDate, 'EEEE, dd/MM/yyyy')}
               time={selectedTime}
               service={SERVICES.find(s => s.type === bookedService)?.name}

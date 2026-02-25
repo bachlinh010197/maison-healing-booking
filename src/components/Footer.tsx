@@ -4,6 +4,8 @@ import img7 from '../assets/KYN_0007.jpg';
 import img8 from '../assets/KYN_0008.jpg';
 import img9 from '../assets/KYN_0009.jpg';
 import img10 from '../assets/KYN_0010.jpg';
+import whatsappQR from '../assets/KYN_whatsapp.jpg';
+import zaloQR from '../assets/KYN_zalo.jpg';
 
 const Footer = () => {
   const galleryImages = [img5, img6, img7, img8, img9, img10];
@@ -25,6 +27,16 @@ const Footer = () => {
             <h4>Contact</h4>
             <p>Email: bachdiem1993@gmail.com</p>
             <p>WhatsApp/Zalo/Phone: +84 336256356</p>
+            <div className="footer-contact-qr">
+              <div className="footer-qr-item">
+                <img src={whatsappQR} alt="WhatsApp QR Code" />
+                <span>WhatsApp</span>
+              </div>
+              <div className="footer-qr-item">
+                <img src={zaloQR} alt="Zalo QR Code" />
+                <span>Zalo</span>
+              </div>
+            </div>
           </div>
         </div>
         <div className="footer-gallery">

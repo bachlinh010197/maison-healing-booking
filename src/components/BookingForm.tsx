@@ -9,7 +9,7 @@ import type { ServiceType } from '../types/booking';
 interface BookingFormProps {
   selectedDate: Date;
   selectedTime: string;
-  onSuccess: (bookingId: string, serviceType?: ServiceType, totalPrice?: number) => void;
+  onSuccess: (bookingCode: string, serviceType?: ServiceType, totalPrice?: number) => void;
   onBack: () => void;
 }
 
@@ -44,15 +44,15 @@ const BookingForm = ({ selectedDate, selectedTime, onSuccess, onBack }: BookingF
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const bookingId = await createBooking({
+    const result = await createBooking({
       ...formData,
       date: formatDate(selectedDate),
       timeSlot: selectedTime,
       totalPrice,
     });
 
-    if (bookingId) {
-      onSuccess(bookingId, formData.serviceType, totalPrice);
+    if (result) {
+      onSuccess(result.bookingCode, formData.serviceType, totalPrice);
     }
   };
 
