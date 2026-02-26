@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { collection, addDoc, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import type { Booking } from '../types/booking';
+import { MAX_BOOKINGS_PER_DAY } from '../types/booking';
 import { sendBookingConfirmationEmail } from '../utils/email';
 
 export const useBooking = () => {
@@ -21,6 +22,13 @@ export const useBooking = () => {
       );
 
       const activeBookings = allBookingsForDate.docs.filter(doc => doc.data().status !== 'cancelled');
+
+      // Check day capacity
+      if (activeBookings.length >= MAX_BOOKINGS_PER_DAY) {
+        setError('Sorry, this day is fully booked (maximum 6 sessions per day). Please choose another date.');
+        setLoading(false);
+        return null;
+      }
 
       // Check slot capacity
       const slotGuests = activeBookings
@@ -84,5 +92,28 @@ export const useBooking = () => {
     }
   };
 
-  return { createBooking, getBookingsForDate, loading, error };
+  const getBookingCountsForMonth = useCallback(async (year: number, month: number): Promise<Record<string, number>> => {
+    try {
+      const startDate = `${year}-${String(month).padStart(2, '0')}-01`;
+      const endDate = `${year}-${String(month).padStart(2, '0')}-31`;
+      const q = query(
+        collection(db, 'bookings'),
+        where('date', '>=', startDate),
+        where('date', '<=', endDate)
+      );
+      const snapshot = await getDocs(q);
+      const counts: Record<string, number> = {};
+      snapshot.docs
+        .filter(doc => doc.data().status !== 'cancelled')
+        .forEach(doc => {
+          const date = doc.data().date;
+          counts[date] = (counts[date] || 0) + 1;
+        });
+      return counts;
+    } catch {
+      return {};
+    }
+  }, []);
+
+  return { createBooking, getBookingsForDate, getBookingCountsForMonth, loading, error };
 };

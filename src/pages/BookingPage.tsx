@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { format } from 'date-fns';
 import BookingCalendar from '../components/BookingCalendar';
 import TimeSlotPicker from '../components/TimeSlotPicker';
@@ -6,6 +6,7 @@ import BookingForm from '../components/BookingForm';
 import BookingConfirmation from '../components/BookingConfirmation';
 import { SERVICES } from '../types/booking';
 import type { ServiceType } from '../types/booking';
+import { useBooking } from '../hooks/useBooking';
 
 type BookingStep = 'select-date' | 'select-time' | 'fill-form' | 'confirmation';
 
@@ -16,6 +17,13 @@ const BookingPage = () => {
   const [bookingCode, setBookingCode] = useState<string>('');
   const [bookedService, setBookedService] = useState<ServiceType>('group-sound-bath');
   const [bookedPrice, setBookedPrice] = useState<number>(0);
+  const [bookingCounts, setBookingCounts] = useState<Record<string, number>>({});
+  const { getBookingCountsForMonth } = useBooking();
+
+  const handleMonthChange = useCallback(async (year: number, month: number) => {
+    const counts = await getBookingCountsForMonth(year, month);
+    setBookingCounts(counts);
+  }, [getBookingCountsForMonth]);
 
   const handleDateSelect = (date: Date) => {
     setSelectedDate(date);
@@ -75,7 +83,12 @@ const BookingPage = () => {
               <p className="step-description">
                 Group Sound Bath: weekends 11:00, 15:00, 17:30 · weekdays 17:30. Therapy 1:1: 19:30 every day.
               </p>
-              <BookingCalendar selectedDate={selectedDate} onSelectDate={handleDateSelect} />
+              <BookingCalendar
+                selectedDate={selectedDate}
+                onSelectDate={handleDateSelect}
+                bookingCounts={bookingCounts}
+                onMonthChange={handleMonthChange}
+              />
             </div>
           )}
 

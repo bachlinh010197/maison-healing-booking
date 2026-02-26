@@ -37,3 +37,5 @@ export interface DaySchedule {
   dayOfWeek: number;
   timeSlots: string[];
 }
+
+export const MAX_BOOKINGS_PER_DAY = 6;

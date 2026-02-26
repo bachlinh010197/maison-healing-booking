@@ -749,6 +749,22 @@
   line-height: 1;
 }
 
+.slot-indicator.full {
+  color: #c0392b;
+  font-weight: 600;
+}
+
+.calendar-day.fully-booked {
+  opacity: 0.45;
+  cursor: not-allowed;
+  background-color: rgba(192, 57, 43, 0.06);
+}
+
+.calendar-day.fully-booked:hover {
+  transform: none;
+  box-shadow: none;
+}
+
 /* ========================= */
 /* TIME SLOT PICKER          */
 /* ========================= */
