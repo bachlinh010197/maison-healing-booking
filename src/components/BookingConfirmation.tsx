@@ -15,10 +15,10 @@ const formatPrice = (price: number) => {
 const BookingConfirmation = ({ bookingCode, date, time, service, totalPrice }: BookingConfirmationProps) => {
   return (
     <div className="booking-confirmation">
-      <div className="confirmation-icon">✓</div>
-      <h2>Booking Confirmed!</h2>
+      <div className="confirmation-icon">⏳</div>
+      <h2>Booking Submitted!</h2>
       <p className="confirmation-message">
-        Thank you for booking with Maison SoundHealing. We will send a confirmation to your email.
+        Thank you for booking with Maison SoundHealing. Your booking is pending confirmation from our team. We will notify you via email once it's confirmed.
       </p>
       <div className="confirmation-details">
         <div className="detail-item">

@@ -9,7 +9,7 @@ const AdminPage = () => {
   const { user, loading: authLoading } = useAuth();
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState<'all' | 'confirmed' | 'cancelled'>('all');
+  const [filter, setFilter] = useState<'all' | 'pending' | 'confirmed' | 'cancelled'>('all');
 
   useEffect(() => {
     if (user?.role === 'admin') {
@@ -34,7 +34,7 @@ const AdminPage = () => {
     }
   };
 
-  const handleStatusChange = async (bookingId: string, newStatus: 'confirmed' | 'cancelled') => {
+  const handleStatusChange = async (bookingId: string, newStatus: 'confirmed' | 'pending' | 'cancelled') => {
     try {
       await updateDoc(doc(db, 'bookings', bookingId), { status: newStatus });
       setBookings((prev) =>
@@ -80,6 +80,12 @@ const AdminPage = () => {
             onClick={() => setFilter('all')}
           >
             All ({bookings.length})
+          </button>
+          <button
+            className={`filter-btn ${filter === 'pending' ? 'active' : ''}`}
+            onClick={() => setFilter('pending')}
+          >
+            Pending ({bookings.filter((b) => b.status === 'pending').length})
           </button>
           <button
             className={`filter-btn ${filter === 'confirmed' ? 'active' : ''}`}
@@ -128,28 +134,45 @@ const AdminPage = () => {
                     <td>{booking.serviceType === 'therapy-1-1' ? 'Therapy 1:1' : 'Group Sound Bath'}</td>
                     <td>{booking.numberOfGuests}</td>
                     <td>{booking.totalPrice ? new Intl.NumberFormat('vi-VN').format(booking.totalPrice) + ' ₫' : '—'}</td>
-                    <td>{booking.notes || '—'}</td>
+                    <td className="notes-cell">{booking.notes || '—'}</td>
                     <td>
                       <span className={`status-badge ${booking.status}`}>
                         {statusLabel(booking.status)}
                       </span>
                     </td>
-                    <td>
-                      {booking.status === 'confirmed' ? (
+                    <td className="action-cell">
+                      {booking.status === 'pending' && (
+                        <>
+                          <button
+                            className="action-btn confirm"
+                            onClick={() => handleStatusChange(booking.id!, 'confirmed')}
+                          >
+                            Confirm
+                          </button>
+                          <button
+                            className="action-btn cancel"
+                            onClick={() => handleStatusChange(booking.id!, 'cancelled')}
+                          >
+                            Cancel
+                          </button>
+                        </>
+                      )}
+                      {booking.status === 'confirmed' && (
                         <button
                           className="action-btn cancel"
                           onClick={() => handleStatusChange(booking.id!, 'cancelled')}
                         >
                           Cancel
                         </button>
-                      ) : booking.status === 'cancelled' ? (
+                      )}
+                      {booking.status === 'cancelled' && (
                         <button
                           className="action-btn confirm"
-                          onClick={() => handleStatusChange(booking.id!, 'confirmed')}
+                          onClick={() => handleStatusChange(booking.id!, 'pending')}
                         >
                           Restore
                         </button>
-                      ) : null}
+                      )}
                     </td>
                   </tr>
                 ))}

@@ -21,17 +21,17 @@ export const useBooking = () => {
         )
       );
 
-      const activeBookings = allBookingsForDate.docs.filter(doc => doc.data().status !== 'cancelled');
+      const confirmedBookings = allBookingsForDate.docs.filter(doc => doc.data().status === 'confirmed');
 
-      // Check day capacity
-      if (activeBookings.length >= MAX_BOOKINGS_PER_DAY) {
+      // Check day capacity (only confirmed bookings count)
+      if (confirmedBookings.length >= MAX_BOOKINGS_PER_DAY) {
         setError('Sorry, this day is fully booked (maximum 6 sessions per day). Please choose another date.');
         setLoading(false);
         return null;
       }
 
-      // Check slot capacity
-      const slotGuests = activeBookings
+      // Check slot capacity (only confirmed bookings count)
+      const slotGuests = confirmedBookings
         .filter(doc => doc.data().timeSlot === bookingData.timeSlot)
         .reduce((sum, doc) => sum + (doc.data().numberOfGuests || 1), 0);
 
@@ -42,15 +42,16 @@ export const useBooking = () => {
       }
 
       // Generate booking code: DDMM + sequential number (e.g. 260201, 260202)
+      const allNonCancelled = allBookingsForDate.docs.filter(doc => doc.data().status !== 'cancelled');
       const [, month, day] = bookingData.date.split('-');
-      const seq = String(activeBookings.length + 1).padStart(2, '0');
+      const seq = String(allNonCancelled.length + 1).padStart(2, '0');
       const bookingCode = `${day}${month}${seq}`;
 
       const docRef = await addDoc(collection(db, 'bookings'), {
         ...bookingData,
         bookingCode,
         createdAt: new Date(),
-        status: 'confirmed',
+        status: 'pending',
       });
 
       // Send confirmation email (non-blocking)
@@ -104,7 +105,7 @@ export const useBooking = () => {
       const snapshot = await getDocs(q);
       const counts: Record<string, number> = {};
       snapshot.docs
-        .filter(doc => doc.data().status !== 'cancelled')
+        .filter(doc => doc.data().status === 'confirmed')
         .forEach(doc => {
           const date = doc.data().date;
           counts[date] = (counts[date] || 0) + 1;
