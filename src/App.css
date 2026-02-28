@@ -856,6 +856,18 @@
   color: var(--color-white);
 }
 
+.time-location-tag {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--color-gold);
+  margin-top: 0.3rem;
+}
+
+.time-slot.selected .time-location-tag {
+  color: var(--color-cream-dark);
+}
+
 /* ========================= */
 /* BOOKING FORM              */
 /* ========================= */
@@ -890,6 +902,13 @@
   font-size: 0.95rem;
   color: var(--color-gold);
   font-weight: 500;
+}
+
+.service-info-location {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  margin-top: 0.3rem;
 }
 
 .booking-summary {

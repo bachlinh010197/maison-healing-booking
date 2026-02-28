@@ -81,11 +81,18 @@ const HomePage = () => {
           <h2>Operating Hours</h2>
           <div className="schedule-grid">
             <div className="schedule-card">
-              <h3>Mon - Fri</h3>
+              <h3>Mon, Wed &amp; Fri</h3>
               <div className="schedule-time">
                 <span className="time-badge">17:30</span>
               </div>
-              <p>Evening session daily</p>
+              <p>Evening session</p>
+            </div>
+            <div className="schedule-card">
+              <h3>Tue &amp; Thu</h3>
+              <div className="schedule-time">
+                <span className="time-badge">19:00</span>
+              </div>
+              <p>@ The Sanctuary · 300,000 VND</p>
             </div>
             <div className="schedule-card highlight">
               <h3>Sat - Sun</h3>

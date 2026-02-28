@@ -7,6 +7,7 @@ import BookingConfirmation from '../components/BookingConfirmation';
 import { SERVICES } from '../types/booking';
 import type { ServiceType } from '../types/booking';
 import { useBooking } from '../hooks/useBooking';
+import { getLocationForSlot } from '../utils/schedule';
 
 type BookingStep = 'select-date' | 'select-time' | 'fill-form' | 'confirmation';
 
@@ -81,7 +82,7 @@ const BookingPage = () => {
             <div className="step-content">
               <h2>Select a Date</h2>
               <p className="step-description">
-                Group Sound Bath: weekends 11:00, 15:00, 17:30 · weekdays 17:30. Therapy 1:1: 19:30 every day.
+                Group Sound Bath: weekends 11:00, 15:00, 17:30 · weekdays 17:30 · Tue &amp; Thu 19:00 @ The Sanctuary. Therapy 1:1: 19:30 every day.
               </p>
               <BookingCalendar
                 selectedDate={selectedDate}
@@ -125,6 +126,7 @@ const BookingPage = () => {
               time={selectedTime}
               service={SERVICES.find(s => s.type === bookedService)?.name}
               totalPrice={bookedPrice}
+              location={getLocationForSlot(selectedDate, selectedTime)}
             />
           )}
         </div>

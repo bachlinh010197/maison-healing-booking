@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import type { Location } from '../utils/schedule';
 
 interface BookingConfirmationProps {
   bookingCode: string;
@@ -6,13 +7,14 @@ interface BookingConfirmationProps {
   time: string;
   service?: string;
   totalPrice?: number;
+  location?: Location;
 }
 
 const formatPrice = (price: number) => {
   return new Intl.NumberFormat('vi-VN').format(price) + ' VND';
 };
 
-const BookingConfirmation = ({ bookingCode, date, time, service, totalPrice }: BookingConfirmationProps) => {
+const BookingConfirmation = ({ bookingCode, date, time, service, totalPrice, location }: BookingConfirmationProps) => {
   return (
     <div className="booking-confirmation">
       <div className="confirmation-icon">⏳</div>
@@ -53,12 +55,12 @@ const BookingConfirmation = ({ bookingCode, date, time, service, totalPrice }: B
             📞 +84 336 256 356
           </div>
           <a
-            href="https://www.google.com/maps/place/3A+Ch%E1%BA%BF+Lan+Vi%C3%AAn,+B%E1%BA%AFc+M%E1%BB%B9+An,+Ng%C5%A9+H%C3%A0nh+S%C6%A1n,+%C4%90%C3%A0+N%E1%BA%B5ng+556920,+Vi%E1%BB%87t+Nam/@16.0435717,108.2425689,17z/data=!3m1!4b1!4m6!3m5!1s0x31421766c0014a4b:0x9cafd588e1a29688!8m2!3d16.0435666!4d108.2451438!16s%2Fg%2F11s38nv9_r?entry=ttu&g_ep=EgoyMDI2MDIyMi4wIKXMDSoASAFQAw%3D%3D"
+            href={location?.googleMapsLink || 'https://www.google.com/maps/place/3A+Ch%E1%BA%BF+Lan+Vi%C3%AAn'}
             target="_blank"
             rel="noopener noreferrer"
             className="contact-link"
           >
-            📍 3A Che Lan Vien Street, Da Nang City
+            📍 {location?.address || '3A Che Lan Vien Street, Da Nang City'}
           </a>
         </div>
       </div>

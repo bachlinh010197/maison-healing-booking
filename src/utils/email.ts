@@ -1,6 +1,7 @@
 import emailjs from '@emailjs/browser';
 import { SERVICES } from '../types/booking';
 import type { ServiceType } from '../types/booking';
+import type { Location } from './schedule';
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
@@ -21,6 +22,7 @@ interface BookingEmailData {
   numberOfGuests: number;
   totalPrice: number;
   notes?: string;
+  location?: Location;
 }
 
 export const sendBookingConfirmationEmail = async (data: BookingEmailData): Promise<boolean> => {
@@ -47,8 +49,8 @@ export const sendBookingConfirmationEmail = async (data: BookingEmailData): Prom
     phone: data.phone,
     notes: data.notes || 'N/A',
     contact_phone: '+84 336 256 356',
-    contact_address: '3A Che Lan Vien Street, Da Nang City',
-    google_maps_link: 'https://www.google.com/maps/place/3A+Ch%E1%BA%BF+Lan+Vi%C3%AAn,+B%E1%BA%AFc+M%E1%BB%B9+An,+Ng%C5%A9+H%C3%A0nh+S%C6%A1n,+%C4%90%C3%A0+N%E1%BA%B5ng+556920,+Vi%E1%BB%87t+Nam/@16.0435717,108.2425689,17z/data=!3m1!4b1!4m6!3m5!1s0x31421766c0014a4b:0x9cafd588e1a29688!8m2!3d16.0435666!4d108.2451438!16s%2Fg%2F11s38nv9_r?entry=ttu&g_ep=EgoyMDI2MDIyMi4wIKXMDSoASAFQAw%3D%3D',
+    contact_address: data.location?.address || '3A Che Lan Vien Street, Da Nang City',
+    google_maps_link: data.location?.googleMapsLink || 'https://www.google.com/maps/place/3A+Ch%E1%BA%BF+Lan+Vi%C3%AAn,+B%E1%BA%AFc+M%E1%BB%B9+An,+Ng%C5%A9+H%C3%A0nh+S%C6%A1n,+%C4%90%C3%A0+N%E1%BA%B5ng+556920,+Vi%E1%BB%87t+Nam/@16.0435717,108.2425689,17z/data=!3m1!4b1!4m6!3m5!1s0x31421766c0014a4b:0x9cafd588e1a29688!8m2!3d16.0435666!4d108.2451438!16s%2Fg%2F11s38nv9_r?entry=ttu&g_ep=EgoyMDI2MDIyMi4wIKXMDSoASAFQAw%3D%3D',
   };
 
   try {

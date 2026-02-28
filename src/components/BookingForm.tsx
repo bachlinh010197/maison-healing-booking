@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { format } from 'date-fns';
 import { enUS } from 'date-fns/locale';
 import { useBooking } from '../hooks/useBooking';
-import { formatDate, getServiceTypeForSlot } from '../utils/schedule';
+import { formatDate, getServiceTypeForSlot, getLocationForSlot, getGroupPriceForSlot } from '../utils/schedule';
 import { SERVICES } from '../types/booking';
 import type { ServiceType } from '../types/booking';
 
@@ -20,6 +20,7 @@ const formatPrice = (price: number) => {
 const BookingForm = ({ selectedDate, selectedTime, onSuccess, onBack }: BookingFormProps) => {
   const { createBooking, loading, error } = useBooking();
   const autoServiceType = getServiceTypeForSlot(selectedTime);
+  const location = getLocationForSlot(selectedDate, selectedTime);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -34,12 +35,19 @@ const BookingForm = ({ selectedDate, selectedTime, onSuccess, onBack }: BookingF
     [formData.serviceType]
   );
 
-  const totalPrice = useMemo(() => {
+  const unitPrice = useMemo(() => {
     if (formData.serviceType === 'group-sound-bath') {
-      return selectedService.price * formData.numberOfGuests;
+      return getGroupPriceForSlot(selectedDate, selectedTime);
     }
     return selectedService.price;
-  }, [formData.serviceType, formData.numberOfGuests, selectedService.price]);
+  }, [formData.serviceType, selectedDate, selectedTime, selectedService.price]);
+
+  const totalPrice = useMemo(() => {
+    if (formData.serviceType === 'group-sound-bath') {
+      return unitPrice * formData.numberOfGuests;
+    }
+    return unitPrice;
+  }, [formData.serviceType, formData.numberOfGuests, unitPrice]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,6 +57,7 @@ const BookingForm = ({ selectedDate, selectedTime, onSuccess, onBack }: BookingF
       date: formatDate(selectedDate),
       timeSlot: selectedTime,
       totalPrice,
+      location,
     });
 
     if (result) {
@@ -86,10 +95,11 @@ const BookingForm = ({ selectedDate, selectedTime, onSuccess, onBack }: BookingF
         <div className="service-info-banner">
           <div className="service-info-details">
             <span className="service-info-name">{selectedService.name}</span>
-            <span className="service-info-price">{formatPrice(selectedService.price)}/{selectedService.unit}</span>
+            <span className="service-info-price">{formatPrice(unitPrice)}/{selectedService.unit}</span>
             {autoServiceType === 'therapy-1-1' && (
               <span className="service-option-note">(You can book session for yourself or you can share with your friends, price will not change)</span>
             )}
+            <span className="service-info-location">📍 {location.name} — {location.address}</span>
           </div>
         </div>
 
@@ -160,7 +170,7 @@ const BookingForm = ({ selectedDate, selectedTime, onSuccess, onBack }: BookingF
           {formData.serviceType === 'group-sound-bath' && (
             <div className="total-row">
               <span className="total-label">Guests</span>
-              <span className="total-value">{formData.numberOfGuests} × {formatPrice(selectedService.price)}</span>
+              <span className="total-value">{formData.numberOfGuests} × {formatPrice(unitPrice)}</span>
             </div>
           )}
           <div className="total-row total-final">

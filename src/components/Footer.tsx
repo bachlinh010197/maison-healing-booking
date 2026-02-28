@@ -20,7 +20,8 @@ const Footer = () => {
         <div className="footer-info">
           <div className="footer-section">
             <h4>Schedule</h4>
-            <p>Mon - Fri: 17:30</p>
+            <p>Mon, Wed &amp; Fri: 17:30</p>
+            <p>Tue &amp; Thu: 19:00</p>
             <p>Sat - Sun: 11:00, 15:00, 17:30</p>
           </div>
           <div className="footer-section">

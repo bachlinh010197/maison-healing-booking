@@ -4,12 +4,17 @@ import { db } from '../firebase/config';
 import type { Booking } from '../types/booking';
 import { MAX_BOOKINGS_PER_DAY } from '../types/booking';
 import { sendBookingConfirmationEmail } from '../utils/email';
+import type { Location } from '../utils/schedule';
+
+interface CreateBookingData extends Omit<Booking, 'id' | 'createdAt' | 'status' | 'bookingCode'> {
+  location?: Location;
+}
 
 export const useBooking = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const createBooking = async (bookingData: Omit<Booking, 'id' | 'createdAt' | 'status' | 'bookingCode'>): Promise<{ id: string; bookingCode: string } | null> => {
+  const createBooking = async (bookingData: CreateBookingData): Promise<{ id: string; bookingCode: string } | null> => {
     setLoading(true);
     setError(null);
 
@@ -47,8 +52,9 @@ export const useBooking = () => {
       const seq = String(allNonCancelled.length + 1).padStart(2, '0');
       const bookingCode = `${day}${month}${seq}`;
 
+      const { location: _location, ...firestoreData } = bookingData;
       const docRef = await addDoc(collection(db, 'bookings'), {
-        ...bookingData,
+        ...firestoreData,
         bookingCode,
         createdAt: new Date(),
         status: 'pending',
@@ -66,6 +72,7 @@ export const useBooking = () => {
         numberOfGuests: bookingData.numberOfGuests,
         totalPrice: bookingData.totalPrice,
         notes: bookingData.notes,
+        location: bookingData.location,
       });
 
       setLoading(false);
