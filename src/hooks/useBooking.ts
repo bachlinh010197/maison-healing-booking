@@ -123,5 +123,24 @@ export const useBooking = () => {
     }
   }, []);
 
-  return { createBooking, getBookingsForDate, getBookingCountsForMonth, loading, error };
+  const getUserBookings = useCallback(async (email: string): Promise<Booking[]> => {
+    try {
+      const q = query(
+        collection(db, 'bookings'),
+        where('email', '==', email)
+      );
+      const snapshot = await getDocs(q);
+      const bookings = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+        createdAt: doc.data().createdAt?.toDate?.() || new Date(),
+      })) as Booking[];
+      return bookings.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    } catch (err) {
+      console.error('Error fetching user bookings:', err);
+      return [];
+    }
+  }, []);
+
+  return { createBooking, getBookingsForDate, getBookingCountsForMonth, getUserBookings, loading, error };
 };

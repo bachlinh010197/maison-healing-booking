@@ -56,6 +56,15 @@ const Header = () => {
             >
               Courses
             </Link>
+            {user && (
+              <Link
+                to="/my-bookings"
+                className={location.pathname === '/my-bookings' ? 'active' : ''}
+                onClick={() => setMenuOpen(false)}
+              >
+                My Bookings
+              </Link>
+            )}
             {user?.role === 'admin' && (
               <Link
                 to="/admin"

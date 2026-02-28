@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { format } from 'date-fns';
 import { enUS } from 'date-fns/locale';
 import { useBooking } from '../hooks/useBooking';
+import { useAuth } from '../hooks/useAuth';
 import { formatDate, getServiceTypeForSlot, getLocationForSlot, getGroupPriceForSlot } from '../utils/schedule';
 import { SERVICES } from '../types/booking';
 import type { ServiceType } from '../types/booking';
@@ -19,6 +20,7 @@ const formatPrice = (price: number) => {
 
 const BookingForm = ({ selectedDate, selectedTime, onSuccess, onBack }: BookingFormProps) => {
   const { createBooking, loading, error } = useBooking();
+  const { user } = useAuth();
   const autoServiceType = getServiceTypeForSlot(selectedTime);
   const location = getLocationForSlot(selectedDate, selectedTime);
   const [formData, setFormData] = useState({
@@ -54,6 +56,7 @@ const BookingForm = ({ selectedDate, selectedTime, onSuccess, onBack }: BookingF
 
     const result = await createBooking({
       ...formData,
+      userId: user?.uid,
       date: formatDate(selectedDate),
       timeSlot: selectedTime,
       totalPrice,

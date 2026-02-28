@@ -19,6 +19,7 @@ export const SERVICES: ServiceOption[] = [
 
 export interface Booking {
   id?: string;
+  userId?: string;
   bookingCode: string;
   name: string;
   email: string;
